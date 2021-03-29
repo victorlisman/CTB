@@ -2,12 +2,6 @@ from pycoingecko import CoinGeckoAPI
 import cbpro
 
 class CryptoCoin(CoinGeckoAPI):
-    sCoinName = "DEFAULT"
-    sWalletAdress = "DEFAULT"
-    bActive = False
-    fMinSell = 0
-    fMaxSell = 0
-
     def __init__(self, sCoinName, sWalletAdress, bActive, fMaxSell, fMinSell):
         self.sCoinName = sCoinName
         self.sWalletAdress = sWalletAdress
@@ -54,12 +48,11 @@ class Profile:
         print("Profile deleted")
 
 def __main__():
-
-
     pyegay = CryptoCoin('ethereum', 'mata', True, 1750, 1700)
-
     pyegay.isWithinParameters()
+    pass
 
 
-__main__()
+if __name__ == '__main__':
+    __main__()
 
