@@ -1,7 +1,7 @@
 from pycoingecko import CoinGeckoAPI
 import cbpro
 
-class CryptoCoin:
+class CryptoCoin(CoinGeckoAPI):
     sCoinName = "DEFAULT"
     sWalletAdress = "DEFAULT"
     bActive = False
@@ -17,12 +17,23 @@ class CryptoCoin:
 
         print("Coin added")
     
-    def __del__():
+    def __del__(self):
         print("Coin deleted")
 
-    def isWithinParameters(self, fCurrent):
+    def getCurrentPrice(self):
+        price = CoinGeckoAPI().get_price('ethereum', 'usd')
+        res = []
+
+        for key in price.keys():
+            res.append(price[key])
+        
+        return res[0]['usd']
+
+    def isWithinParameters(self):
+        fCurrent = self.getCurrentPrice()
+
         if self.fMaxSell < fCurrent or self.fMinSell > fCurrent:
-            print("aaa")
+            print(fCurrent)
 
     def bSell(self, bActivator):
         if bActivator == True:
@@ -39,13 +50,16 @@ class Profile:
 
         print("Profile added")
 
-    def __del__():
+    def __del__(self):
         print("Profile deleted")
 
 def __main__():
-    a = CryptoCoin("bitcoin", "mihai", True, 8.5, -5)
-    a.isWithinParameters(9)
-    a.bSell(True)
+
+
+    pyegay = CryptoCoin('ethereum', 'mata', True, 1750, 1700)
+
+    pyegay.isWithinParameters()
+
 
 __main__()
 
