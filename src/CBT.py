@@ -15,6 +15,9 @@ class CryptoCoin():
     def __del__(self):
         print("Coin deleted")
 
+    def GetCoinName(self):
+        return self.__sCoinName
+
     def GetCurrentPrice(self):
         price = CoinGeckoAPI().get_price(self.__sCoinName, self.__sCurrency)
         res = []
