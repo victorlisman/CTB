@@ -2,9 +2,8 @@ from pycoingecko import CoinGeckoAPI
 import cbpro
 
 class CryptoCoin():
-    def __init__(self, sCoinName, bActive, fMaxSell, fMinSell, sWalletAdress, sCurrency):
+    def __init__(self, sCoinName, fMaxSell, fMinSell, sWalletAdress, sCurrency):
         self.__sCoinName = sCoinName
-        self.__bActive = bActive
         self.__fMaxSell = fMaxSell
         self.__fMinSell = fMinSell
         self.__sWalletAdress = sWalletAdress
@@ -27,15 +26,16 @@ class CryptoCoin():
         
         return res[0][self.__sCurrency]
 
-    def IsWithinParameters(self):
-        fCurrent = self.GetCurrentPrice()
-
-        if self.__fMaxSell < fCurrent or self.__fMinSell > fCurrent:
-            print(fCurrent)
-
     def bSell(self, bActivator):
         if bActivator == True:
             print("sell")
+
+    def IsOutOfParameters(self):
+        fCurrent = self.GetCurrentPrice()
+
+        if self.__fMaxSell < fCurrent or self.__fMinSell > fCurrent:
+            self.bSell(True)
+
 
 class Profile:
     def __init__(self, sName, sCardNumber, nCCV, sExpDate, sUserName, sPassword):
@@ -53,12 +53,10 @@ class Profile:
         return self.__Name
     
     def GetCardDetails(self):
-        aDetails = [self.__sCardNumber, self.__nCCV, self.__sExpDate]
-        return aDetails
+        return [self.__sCardNumber, self.__nCCV, self.__sExpDate]
     
     def GetLoginDetails(self):
-        aDetails = [self.__sUserName, self.__sPassword]
-        return aDetails
+        return [self.__sUserName, self.__sPassword]
 
     def SetName(self, sName):
         self.__sName = sName
@@ -68,15 +66,17 @@ class Profile:
         self.__nCCV = nCCV
         self.__sExpDate = sExpDate
 
+    def SetLoginDetails(self, sUserName, sPassword):
+        self.__sUserName = sUserName
+        self.__sPassword = sPassword
+
     def AddCoin(self, sCoinName, fMaxSell, fMinSell, sWalletAdress, sCurrency):
-        self.aCoinList.append(CryptoCoin(sCoinName, True, fMaxSell, fMinSell, sWalletAdress, sCurrency))
+        self.aCoinList.append(CryptoCoin(sCoinName, fMaxSell, fMinSell, sWalletAdress, sCurrency))
 
     def __del__(self):
         print("Profile deleted")
 
 def __main__():
-    Victor = Profile("Victor", "xx", 567, "02/22", "vl", "lkadsjfla")
-    Victor.AddCoin('ethereum', 1700, 1700, "xx", 'usd')
     pass
 
 if __name__ == '__main__':
