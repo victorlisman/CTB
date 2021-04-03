@@ -36,7 +36,6 @@ class CryptoCoin():
         if self.__fMaxSell < fCurrent or self.__fMinSell > fCurrent:
             self.bSell(True)
 
-
 class Profile:
     def __init__(self, sName, sCardNumber, nCCV, sExpDate, sUserName, sPassword):
         self.__sName = sName
