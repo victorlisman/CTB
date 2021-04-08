@@ -7,5 +7,5 @@ Quick Start:
 ```
 git clone https://github.com/victorlisman/CTB
 pip install pycoingecko
-pip install cbpro
+pip install python-binance
 ```

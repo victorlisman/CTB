@@ -1,5 +1,5 @@
 from pycoingecko import CoinGeckoAPI
-import cbpro
+from binance.client import Client
 
 class CryptoCoin():
     def __init__(self, sCoinName, fMaxSell, fMinSell, sWalletAdress, sCurrency):
